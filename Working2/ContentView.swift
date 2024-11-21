@@ -15,10 +15,25 @@ struct Person: Codable , Identifiable {
 }
 
 struct ContentView: View {
+    
+    @State var personList: [Person] = []
+    
     var body: some View {
         VStack {
+            NavigationStack{
+                List(personList) {
+                    List in
+                    VStack{
+                        Text(List.name)
+                        Text("\(List.age)") //String interpolation
+                    
+                    }
+                }
+                .navigationTitle("User Registered")
+            }
             
-            Text("Project Update")
+            
+            
         }
         .padding()
     }
