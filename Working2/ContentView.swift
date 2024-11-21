@@ -36,11 +36,15 @@ struct ContentView: View {
                         Button("", systemImage: "plus"){
                             showForm.toggle()
                             
+                            
                         }
                     }
                 }
                 
                 
+            }
+            .sheet(isPresented: $showForm){
+                AddPerson(personList: $personList)
             }
             
             
