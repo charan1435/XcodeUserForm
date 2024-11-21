@@ -15,6 +15,7 @@ struct Person: Codable , Identifiable {
 }
 
 struct ContentView: View {
+    @State var showForm: Bool = false
     
     @State var personList: [Person] = []
     
@@ -30,6 +31,16 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle("User Registered")
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        Button("", systemImage: "plus"){
+                            showForm.toggle()
+                            
+                        }
+                    }
+                }
+                
+                
             }
             
             
