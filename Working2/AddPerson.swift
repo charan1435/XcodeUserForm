@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct AddPerson: View {
+    @Binding var personList : [Person]
+    @State var name: String=""
+    @State var age: String=""
+   
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            Form{
+                TextField("Enter Name", text: $name)
+                TextField("Enter Age", text: $age)
+            }
+            .navigationTitle("Add Person")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading){
+                    Button("ADD"){
+                        
+                    }
+                
+                }
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button("CANCEL"){
+                        
+                    }
+                    .tint(.red)
+                
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    AddPerson()
+    AddPerson(personList: .constant([]))
 }
