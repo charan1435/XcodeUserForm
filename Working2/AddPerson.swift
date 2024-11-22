@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddPerson: View {
+    @Environment(\.dismiss) var dismiss
     @Binding var personList : [Person]
     @State var name: String=""
     @State var age: String=""
@@ -22,12 +23,23 @@ struct AddPerson: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
                     Button("ADD"){
+                        if let validAge = Int(age), !name.isEmpty{
+                            let newPerson = Person(name: name, age: validAge, eligibility: validAge >= 20)
+                            personList.append(newPerson)
+                            dismiss()
+                            
+                            
+                        
+                            
+                        }
+                        
                         
                     }
                 
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("CANCEL"){
+                        dismiss()
                         
                     }
                     .tint(.red)
