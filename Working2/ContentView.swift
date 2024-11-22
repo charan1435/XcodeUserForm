@@ -24,8 +24,9 @@ struct ContentView: View {
             NavigationStack{
                 List(personList) {
                     List in
-                    VStack{
+                    VStack(alignment: .leading){
                         Text(List.name)
+                            .bold()
                         Text("\(List.age)") //String interpolation
                     
                     }
