@@ -16,8 +16,10 @@ struct Person: Codable , Identifiable {
 
 struct ContentView: View {
     @State var showForm: Bool = false
-    
     @State var personList: [Person] = []
+    @Binding var fontSize: Double
+    
+    @AppStorage("personList") var storedPersonList : Data = Data()
     
     var body: some View {
         VStack {
@@ -26,8 +28,10 @@ struct ContentView: View {
                     List in
                     VStack(alignment: .leading){
                         Text(List.name)
+                            .font(.system(size: fontSize))
                             .bold()
                         Text("\(List.age)") //String interpolation
+                            .font(.system(size: fontSize))
                     
                     }
                 }
@@ -45,16 +49,32 @@ struct ContentView: View {
                 
             }
             .sheet(isPresented: $showForm){
-                AddPerson(personList: $personList)
+                AddPerson(personList: $personList, saveAction: savePersonList)
             }
             
             
             
         }
         .padding()
+        .onAppear(){
+            loadPersonList()
+        }
+    }
+    
+    private func  savePersonList(){
+        if let encodePersonList = try? JSONEncoder().encode(personList){
+            storedPersonList = encodePersonList
+        }
+        
+    }
+    
+    private func loadPersonList() {
+        if let decodePersonList = try? JSONDecoder().decode([Person].self, from: storedPersonList){
+            personList=decodePersonList
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(fontSize: .constant(20.0))
 }

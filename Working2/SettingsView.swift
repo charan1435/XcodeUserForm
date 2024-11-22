@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var fontSize: Double = 20.0
+    @Binding var fontSize: Double
     var body: some View {
         NavigationStack{
             VStack{
@@ -23,5 +23,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(fontSize: .constant(20.0))
 }

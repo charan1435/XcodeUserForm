@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @State private var fontSize: Double = 20.0
     var body: some View {
         TabView{
-            ContentView()
+            ContentView(fontSize: $fontSize)
                 .tabItem{
                     Label("Home", systemImage: "house")
                 }
-            SettingsView()
+            SettingsView(fontSize: $fontSize)
                 .tabItem{
                     Label("Settings", systemImage: "gear")
         

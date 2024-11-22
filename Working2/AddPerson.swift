@@ -10,8 +10,10 @@ import SwiftUI
 struct AddPerson: View {
     @Environment(\.dismiss) var dismiss
     @Binding var personList : [Person]
+    
     @State var name: String=""
     @State var age: String=""
+    let saveAction: () -> Void
    
     var body: some View {
         NavigationStack{
@@ -26,6 +28,7 @@ struct AddPerson: View {
                         if let validAge = Int(age), !name.isEmpty{
                             let newPerson = Person(name: name, age: validAge, eligibility: validAge >= 20)
                             personList.append(newPerson)
+                            saveAction()
                             dismiss()
                             
                             
@@ -51,5 +54,5 @@ struct AddPerson: View {
 }
 
 #Preview {
-    AddPerson(personList: .constant([]))
+    AddPerson(personList: .constant([]), saveAction: {})
 }
